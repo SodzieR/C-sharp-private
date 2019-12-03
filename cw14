@@ -1,0 +1,124 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace cw14
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Ulamek dekleracja_nowego_ulamka1 = new Ulamek(1, 3);
+            Ulamek dekleracja_nowego_ulamka2 = new Ulamek(4);
+            Console.WriteLine("u1 = {0} \nu2 = {1}", dekleracja_nowego_ulamka1.Wyswietl(), dekleracja_nowego_ulamka2.Wyswietl());
+
+            dekleracja_nowego_ulamka1.Ustaw(1, 3);
+            dekleracja_nowego_ulamka2.Ustaw(50);
+            Console.WriteLine(dekleracja_nowego_ulamka1.GetLicznikMianownik);
+            Console.WriteLine(dekleracja_nowego_ulamka2.GetLicznikMianownik);
+
+            Console.WriteLine((dekleracja_nowego_ulamka1 + dekleracja_nowego_ulamka2).Wyswietl());
+            Console.WriteLine((dekleracja_nowego_ulamka1 - dekleracja_nowego_ulamka2).Wyswietl());
+            Console.WriteLine((dekleracja_nowego_ulamka1 * dekleracja_nowego_ulamka2).Wyswietl());
+            Console.WriteLine((dekleracja_nowego_ulamka1 / dekleracja_nowego_ulamka2).Wyswietl());
+
+            //NWD
+            dekleracja_nowego_ulamka1.Uprosc2();
+
+            Console.ReadKey();
+        }
+        public class Ulamek
+        {
+            // Arithmetic operators
+            public static Ulamek operator +(Ulamek u1, Ulamek u2)
+            {
+                double wspolny_mianownik = u1.mianownik * u2.mianownik;
+                double licznik_u1 = u1.licznik * u2.mianownik;
+                double licznik_u2 = u2.licznik * u1.mianownik;
+                double licznik_po_dodaniu = u1.licznik + u2.licznik;
+                return new Ulamek(licznik_po_dodaniu, wspolny_mianownik);
+            }
+            public static Ulamek operator -(Ulamek u1, Ulamek u2)
+            {
+                double wspolny_mianownik = u1.mianownik * u2.mianownik;
+                double licznik_u1 = u1.licznik * u2.mianownik;
+                double licznik_u2 = u2.licznik * u1.mianownik;
+                double licznik_po_odjeciu = u1.licznik - u2.licznik;
+                return new Ulamek(licznik_po_odjeciu, wspolny_mianownik);
+            }
+            public static Ulamek operator *(Ulamek u1, Ulamek u2)
+            {
+                double wspolny_mianownik = u1.mianownik * u2.mianownik;
+                double licznik_u1 = u1.licznik * u2.mianownik;
+                double licznik_u2 = u2.licznik * u1.mianownik;
+                double licznik_po_mnozeniu = u1.licznik * u2.licznik;
+                return new Ulamek(licznik_po_mnozeniu, wspolny_mianownik);
+            }
+            public static Ulamek operator /(Ulamek u1, Ulamek u2)
+            {
+                double wspolny_mianownik = u1.mianownik * u2.mianownik;
+                double licznik_dzielenie = u1.licznik * u2.mianownik;
+                double mianownik_dzielenie = u1.mianownik * u2.licznik;
+                return new Ulamek(licznik_dzielenie, mianownik_dzielenie);
+            }
+            // Class
+            private double licznik, mianownik;
+            public string GetLicznikMianownik
+            {
+                get { return string.Format("licznik: {0}, mianownik: {1}", licznik, mianownik); }
+            }
+            public Ulamek(double input_licznik, double input_mianownik)
+            {
+                licznik = input_licznik;
+                mianownik = input_mianownik;
+            }
+            public Ulamek(double input_licznik)
+            {
+                licznik = input_licznik;
+                mianownik = 1;
+            }
+            public string Wyswietl()
+            {
+                return string.Format("{0}/{1}", licznik, mianownik);
+            }
+            public void Ustaw(double input_licznik_ustaw)
+            {
+                licznik = input_licznik_ustaw;
+            }
+            public void Ustaw(double input_licznik_ustaw, double input_mianownik_ustaw)
+            {
+                licznik = input_licznik_ustaw;
+                mianownik = input_mianownik_ustaw;
+            }
+            // ?
+            /*public void Uprosc()
+            {
+                double dzielnik;
+                for (dzielnik = Math.Min(licznik, mianownik); dzielnik > 0; dzielnik--)
+                    if (licznik % dzielnik == 0 && mianownik % dzielnik == 0) break;
+                licznik = licznik / dzielnik;
+                mianownik = mianownik / dzielnik;
+                Console.WriteLine("{0}/{1}", licznik, dzielnik);
+            }*/
+            public void Uprosc2()
+            {
+                Console.WriteLine("\nUlamek poddany uproszczeniu wynosi {0}/{1}", licznik, mianownik);
+                double modulo;
+                do
+                {
+                    modulo = licznik % mianownik;
+                    if (modulo == 0)
+                        break;
+                    licznik = mianownik;
+                    mianownik = modulo;
+                } while (true);
+                licznik = licznik / mianownik;
+                Console.WriteLine("NWD wynosi: {0}", mianownik);
+                mianownik = mianownik / mianownik;
+                Console.WriteLine("{0}/{1}", mianownik, licznik);
+            }
+        }
+    }
+}
