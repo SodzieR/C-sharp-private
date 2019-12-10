@@ -1,0 +1,68 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Kolokwium
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Main Main
+            TrojkatRB wA = new TrojkatRB(2, 4, 2.5);
+            wA.Prezentuj();
+            // ReadKey
+            Console.ReadKey();
+        }
+        // Zadanie A
+        public class Punkt
+        {
+            private double wsp_x;
+            private double wsp_y;
+            public double X
+            {
+                get { return wsp_x; }
+            }
+            public double Y
+            {
+                get { return wsp_y; }
+            }
+            public Punkt(double wps_x_input, double wsp_y_input)
+            {
+                wsp_x = wps_x_input;
+                wsp_y = wsp_y_input;
+            }
+            public double Przesun(double wek_x, double wek_y)
+            {
+                wsp_x = wsp_x + wek_x;
+                wsp_y = wsp_y + wek_y;
+                return wsp_x + wsp_y;
+            }
+            static void Dlugosc(ref Punkt punkt1, ref Punkt punkt2)
+            {
+                double dlugosc_odcinka;
+                dlugosc_odcinka = Math.Sqrt(Math.Pow(punkt2.X - punkt1.X, 2) + Math.Pow(punkt2.Y - punkt1.Y, 2));
+                Console.WriteLine("Dlugosc odcinka pomiedzy Twoimi punktami to: {0}", dlugosc_odcinka);
+            }
+        }
+        public class TrojkatRB
+        {
+            public Punkt wA = new Punkt(2, 4);
+            public Punkt wB = new Punkt(0, 0);
+            public Punkt wC = new Punkt(0, 0);
+            public TrojkatRB(double wspAx, double wspAy, double DlBoku)
+            {
+                double wspBx = wB.Przesun(DlBoku, 0);
+                double h = (double)Math.Sqrt(3) / (double)2 * DlBoku;
+                double wspCx = wC.Przesun(DlBoku / 2, h);
+            }
+            public void Prezentuj()
+            {
+                Console.WriteLine("Wspolrzedne punktu A:\nwsp_x: {0}\nwsp_y: {1}", wA.X, wA.Y);
+                Console.WriteLine("Wspolrzedne punktu C:\nwsp_x: {0}\nwsp_y: {1}", wC.X, wC.Y);
+            }
+        }
+    }
+}
