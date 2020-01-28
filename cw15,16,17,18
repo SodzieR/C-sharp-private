@@ -1,0 +1,78 @@
+namespace Ćw._18
+{
+    public class Figura
+    {
+        public int X;
+        public int Y;
+        public Figura(int x1, int y1)
+        {
+            X = x1;
+            Y = y1;
+        }
+        public virtual void Wyswietl()
+        {
+            Console.WriteLine("Podano punkt o współrzędnych ({0}, {1}).", X, Y);
+        }
+        public virtual double Pole()
+        {
+            return 0;
+        }
+    }
+    class Prostokat : Figura
+    {
+        public int szerokosc, wysokosc;
+        public Prostokat(int a, int b, int sz, int wys) : base(a, b)
+        {
+            szerokosc = sz;
+            wysokosc = wys;
+        }
+        public override void Wyswietl()
+        {
+            base.Wyswietl();
+            Console.WriteLine("Szerokość: {0}", szerokosc);
+            Console.WriteLine("Wysokość: {0}", wysokosc);
+            Console.WriteLine("Pole: {0}", Pole());
+        }
+        public override double Pole()
+        {
+            return szerokosc * wysokosc;
+        }
+    }
+    class Kwadrat : Prostokat
+    {
+        public Kwadrat(int c, int d, int dl_boku1) : base(c, d, dl_boku1, dl_boku1)
+        {
+        }
+        public override void Wyswietl()
+        {
+            Console.WriteLine("Podano punkt o współrzędnych ({0}, {1}).", X, Y);
+            Console.WriteLine("Długość boku: {0}", szerokosc);
+            Console.WriteLine("Pole: {0}", Pole());
+        }
+    }
+    class Kolo : Figura
+    {
+        public int promien;
+        public Kolo(int e, int f, int pr) : base (e, f)
+        {
+            promien = pr;
+        }
+        public override double Pole()
+        {
+            return promien*promien*Math.PI;
+        }
+        public override void Wyswietl()
+        {
+            Console.WriteLine("Podano punkt o współrzędnych ({0}, {1}), który jest środkiem koła o promieniu {2}. Pole jego powierzchni wynosi {3}.", X, Y, promien, Pole());
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Kolo k1 = new Kolo(9, 3, 8);
+            k1.Wyswietl();
+            Console.ReadKey();
+        }
+    }
+}
