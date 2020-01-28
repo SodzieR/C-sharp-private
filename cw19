@@ -1,0 +1,48 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace cw19
+{ 
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            List<Figura> Figury = new List<Figura>
+            {
+                new Figura(1,2),
+                new Figura(3,4),
+                new Figura(5,6),
+                new Figura(7,8),
+                new Figura(9,10),
+            };
+
+            WyswietlWszystko(Figury);
+
+            Console.ReadKey();
+        }
+        public static void WyswietlWszystko(List<Figura> lista)
+        {
+            foreach (Figura moja_figura in lista)
+            {
+                moja_figura.Wyswietl();
+            }
+        }
+    }
+    public class Figura
+    {
+        public int X;
+        public int Y;
+        public Figura(int x1, int y1)
+        {
+            X = x1;
+            Y = y1;
+        }
+        public void Wyswietl()
+        {
+            Console.WriteLine("Podano punkt o współrzędnych ({0}, {1}).", X, Y);
+        }
+    }
+}
