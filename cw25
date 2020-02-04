@@ -1,0 +1,34 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace cw25
+{
+    class Program
+    {
+        unsafe static void Main(string[] args)
+        {
+            char[] char_array = { 'a', 'r', 'r', 'a', 'y' };
+            fixed (char* char_array_element = char_array)
+            {
+                Console.WriteLine("Tablica przed zamianie znaku 'a' na znak 'Q':");
+                for (int i = 0; i < 5; i++)
+                {
+                    Console.WriteLine("{0}", *(char_array_element + i));
+                    if(*(char_array_element + i) == 'a')
+                    {
+                        *(char_array_element + i) = 'Q';
+                    }   
+                }
+                Console.WriteLine("Tablica po zamianie:");
+                for (int i = 0; i < 5; i++)
+                {
+                    Console.WriteLine("{0}", *(char_array_element + i));
+                }
+            }
+            Console.ReadKey();
+        }
+    }
+}
