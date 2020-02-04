@@ -1,0 +1,25 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace cw24
+{
+    class Program
+    {
+        unsafe static void Main(string[] args)
+        {
+            char* pointer_x = stackalloc char[123];
+            for (int i = 65; i <= 123; i++)
+            {
+                pointer_x[i] = (char)i;
+            }
+            for(int i = 65; i <= 123; i++)
+            {
+                Console.WriteLine("Dla indeksu i: {0} - Wartosc x[i] wynosi: {1}", i, pointer_x[i]);
+            }
+            Console.ReadKey();
+        }
+    }
+}
