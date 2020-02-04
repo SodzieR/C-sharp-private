@@ -1,0 +1,28 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace cw23
+{
+    class Program
+    {
+        unsafe public static void Swap(ref int* A_input, ref int* B_input)
+        {
+            int* tmp = A_input;
+            A_input = B_input;
+            B_input = tmp;
+        }
+        unsafe static void Main(string[] args)
+        {
+            int a, b;
+            int* A = &a;
+            int* B = &b;
+            Console.WriteLine("Adres A przed zamiana: {0}\nAdres B przed zamiana: {1}", (int)A, (int)B);
+            Swap(ref A, ref B);
+            Console.WriteLine("\nAdres A po zamianie: {0}\nAdres B po zamianie: {1}", (int)A, (int)B);
+            Console.ReadKey();
+        }
+    }
+}
