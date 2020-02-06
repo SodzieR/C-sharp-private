@@ -1,0 +1,77 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Ćwiczenie_21.Tłumacz
+{
+    class Program
+    {// Adrian Janucik
+        // myDictionary declaration
+        private static Dictionary<string, string> myDictionary = new Dictionary<string, string>
+            {
+                { "jest", "is" },
+                { "ma", "has" },
+                { "lubi", "likes" },
+                { "oglądać", "to watch" },
+                { "kota", "cat" },
+                { "włosy", "hair" },
+                { "filmy", "movies" },
+                { "bardzo", "very" },
+                { "wysoki", "high" },
+                { "rude", "red" }
+            };
+        static string TranslateAWord(string word_in)
+        {
+            if (!myDictionary.ContainsKey(word_in))
+                return word_in;
+            else
+                return myDictionary[word_in];
+        }
+        static string TransalteWholeLine(string zdanie_in)
+        {
+            // removes dots
+            zdanie_in = zdanie_in.Remove(zdanie_in.Length - 1);
+            string[] words = zdanie_in.Split(' ');
+            string zdanie_out = "";
+            foreach (string word in words)
+            {
+                string temp = TranslateAWord(word) + " ";
+                zdanie_out = zdanie_out + temp;
+            }
+            zdanie_out = zdanie_out.Insert(zdanie_out.Length - 1,".");
+            return zdanie_out;
+        }
+        static void Main(string[] args)
+        {
+            // my sentences
+            string zdanie1 = "Ala ma kota.", zdanie2 = "Bartek jest bardzo wysoki.", 
+                zdanie3 = "Kasia ma rude włosy.", zdanie4 = "Karolina lubi oglądać filmy.", zdanie5 = "Jacek lubi C#.";
+
+            // load
+            Console.WriteLine("Tłumaczone zdanie: {0}", zdanie1);
+            string output1 = TransalteWholeLine(zdanie1);
+            Console.WriteLine("{0}", output1);
+
+            Console.WriteLine("\nTłumaczone zdanie: {0}", zdanie2);
+            string output2 = TransalteWholeLine(zdanie2);
+            Console.WriteLine("{0}", output2);
+
+            Console.WriteLine("\nTłumaczone zdanie: {0}", zdanie3);
+            string output3 = TransalteWholeLine(zdanie3);
+            Console.WriteLine("{0}", output3);
+
+            Console.WriteLine("\nTłumaczone zdanie: {0}", zdanie4);
+            string output4 = TransalteWholeLine(zdanie4);
+            Console.WriteLine("{0}", output4);
+
+            Console.WriteLine("\nTłumaczone zdanie: {0}", zdanie5);
+            string output5 = TransalteWholeLine(zdanie5);
+            Console.WriteLine("{0}", output5);
+
+            //
+            Console.ReadKey();
+        }
+    }
+}
